@@ -17,8 +17,8 @@ Files
 - main.go - demo
 - task_test.go - unit tests
 
-Tesk lifecycle
-pending -> processign -> completed or failed
+Task lifecycle
+pending -> processing -> completed or failed
 
 Allowed transitions:
 - pending -> processing
