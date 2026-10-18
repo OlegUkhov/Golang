@@ -19,7 +19,8 @@ func validate(input string) error {
 type TextAnalyzer struct{}
 
 func (TextAnalyzer) Process(input string) (Result, error) {
-	if err := validate(input); err != nil {
+	err := validate(input)
+	if err != nil {
 		return Result{}, err
 	}
 	words := len(strings.Fields(input))
