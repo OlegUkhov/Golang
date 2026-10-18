@@ -32,7 +32,7 @@ type Task struct {
 	ID     int
 	Input  string
 	Status Status
-	Result *Result // check later
+	Result *Result
 }
 
 var allowedTransitions = map[Status][]Status{

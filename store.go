@@ -44,7 +44,9 @@ func (s *Store) Process(id int) error {
 	}
 	res, err := s.processor.Process(t.Input)
 	if err != nil {
-		t.transition(StatusFailed)
+		if terr := t.transition(StatusFailed); terr != nil {
+			return terr
+		}
 		return err
 	}
 	t.Result = &res

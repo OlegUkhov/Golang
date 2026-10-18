@@ -117,6 +117,27 @@ func TestProcess_Twice(t *testing.T) {
 	}
 }
 
+type failingProcessor struct{}
+
+func (failingProcessor) Process(input string) (Result, error) {
+	return Result{}, errors.New("boom")
+}
+
+func TestProcess_Failed(t *testing.T) {
+	store := NewStore(failingProcessor{})
+	task, _ := store.Create("hello")
+	err := store.Process(task.ID)
+	if err == nil {
+		t.Fatalf("expected error")
+	}
+	if task.Status != StatusFailed {
+		t.Errorf("status = %v, want failed", task.Status)
+	}
+	if task.Result != nil {
+		t.Errorf("result must be nil after failure")
+	}
+}
+
 func TestMultipleTasks(t *testing.T) {
 	store := NewStore(TextAnalyzer{})
 	t1, _ := store.Create("hello world")
