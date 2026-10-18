@@ -23,7 +23,7 @@ pending -> processing -> completed or failed
 Allowed transitions:
 - pending -> processing
 - processing -> completed
--> processing -> failed
+- processing -> failed
 
 Validation
 Empty or space only text is rejected with ErrEmptyInput
